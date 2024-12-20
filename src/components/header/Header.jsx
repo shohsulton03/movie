@@ -6,9 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoTvSharp } from "react-icons/io5";
 import React from "react";
 import logo from "@/assets/logos/logo.png";
-import { BsBox2Fill } from "react-icons/bs";
-import { AiFillCopy } from "react-icons/ai";
-import { BiBookmarks } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const lang = [
   {
@@ -26,10 +24,11 @@ const lang = [
 ];
 
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <div className="container flex flex-wrap items-center justify-around py-4">
       <div className="w-[112px] h-[36px]">
-        <img className="w-full h-full" src={logo} alt="" />
+        <img className="w-full h-full select-none cursor-pointer" onClick={() => navigate("/")} src={logo} alt="" />
       </div>
       <ul className="flex w-[250px] flex-wrap justify-between">
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
