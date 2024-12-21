@@ -1,22 +1,29 @@
 import { request } from "@/api";
 import Carousel from "@/components/carousel/Carousel";
-import Footer from "@/components/footer/Footer";
-import Header from "@/components/header/Header";
 import Movies from "@/components/movies/Movies";
-import React, { memo, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { memo } from "react";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    request("/discover/movie").then((res) => {
-      setData(res.data);
-    });
-  }, []);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["movies"],
+    queryFn: () => request.get("/discover/movie").then((res) => res.data),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error?.message || "Something went wrong!"}</div>;
+  }
+
   
+
   return (
     <div className="bg-black">
       <Carousel data={data} />
-      <Movies data={data}/>
+      <Movies data={data} />
     </div>
   );
 };

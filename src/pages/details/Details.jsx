@@ -11,12 +11,12 @@ const Details = () => {
   const [data, setData] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [credits, setCredits] = useState(null);
-  const [translatedCountries, setTranslatedCountries] = useState([]);
-  const [translatedGenres, setTranslatedGenres] = useState([]);
-  const [translatedJobs, setTranslatedJobs] = useState([]);
-  const [translatedCasts, setTranslatedCasts] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [casts, setCasts] = useState([]);
   const navigate = useNavigate();
-
+    
   useEffect(() => {
     request.get(`/movie/${id}`).then((res) => setData(res.data));
     request.get(`/movie/${id}/similar`).then((res) => setSimilar(res.data));
@@ -33,7 +33,7 @@ const Details = () => {
             return translatedName;
           })
         );
-        setTranslatedCountries(translated);
+        setCountries(translated);
       }
     };
 
@@ -47,7 +47,7 @@ const Details = () => {
             return translatedName;
           })
         );
-        setTranslatedGenres(translated);
+        setGenres(translated);
       }
     };
     translateGenres();
@@ -63,14 +63,14 @@ const Details = () => {
             return null;
           })
         );
-        setTranslatedJobs(translatedCrew.filter((name) => name !== null));
+        setJobs(translatedCrew.filter((name) => name !== null));
       }
     };
     translateCrew();
 
     const translateCasts = async () => {
       if (credits?.cast) {
-        const translatedCasts = await Promise.all(
+        const casts = await Promise.all(
           credits.cast.map(async (member) => {
             const translatedCharacter = await translate(member.character, "ru");
             const translatedName = await translate(member.name, "ru");
@@ -80,7 +80,7 @@ const Details = () => {
             };
           })
         );
-        setTranslatedCasts(translatedCasts);
+        setCasts(casts);
       }
     };
     translateCasts();
@@ -94,7 +94,7 @@ const Details = () => {
     translateOverviews();
   }, [data]);
   console.log(data);
-  console.log(translatedCasts);
+  console.log(casts);
 
   const formatTime = (minutes) => {
     const hours = Math.floor(minutes / 60);
@@ -180,27 +180,27 @@ const Details = () => {
             <div className="flex flex-wrap justify-between mt-4">
               <p className="text-sm text-[#A1A1A1]">Производство</p>
               <p className="text-sm text-[#A1A1A1]">
-                {translatedCountries.join(", ")}
+                {countries.join(", ")}
               </p>
             </div>
             <div className="flex flex-wrap justify-between mt-4">
               <p className="text-sm flex-1 text-[#A1A1A1]">Жанр</p>
               <p className="text-sm text-[#A1A1A1]">
-                {translatedGenres.slice(0, 2).join(", ")}
+                {genres.slice(0, 2).join(", ")}
               </p>
             </div>
             <div className="flex flex-wrap justify-between mt-4">
               <p className="text-sm text-[#A1A1A1]">Режиссер</p>
               <p className="text-sm text-[#A1A1A1]">
-                {translatedJobs.join(", ") == ""
+                {jobs.join(", ") == ""
                   ? "Майк Митчелл, Стефани Стайн"
-                  : translatedJobs.slice(0, 2).join(", ")}
+                  : jobs.slice(0, 2).join(", ")}
               </p>
             </div>
           </div>
           <div className="Roli border-b pb-8 border-[#2D2D2D]">
             <h3 className="mt-12 text-white text-xl">В ролях</h3>
-            {translatedCasts.slice(0, 5).map((member, index) => (
+            {casts.slice(0, 5).map((member, index) => (
               <div key={index} className="flex flex-wrap justify-between mt-6">
                 <p className="text-sm text-[#A1A1A1]">{member.name}</p>
                 <p className="text-sm text-[#A1A1A1]">{member.character}</p>
