@@ -1,9 +1,12 @@
 import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 
-const MovieItem = ({ title, poster_path, vote_average, original_language }) => {
+const MovieItem = ({ title, poster_path, vote_average, original_language, id }) => {
+  const navigate = useNavigate()
   return (
     <div className="rounded-xl">
       <img
+      onClick={() => navigate(`/movie/${id}`)}
         src={`${import.meta.env.VITE_IMAGE_URL}${poster_path}`}
         alt=""
         className="w-[280px] h-[400px] rounded-xl"

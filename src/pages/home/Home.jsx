@@ -15,10 +15,8 @@ const Home = () => {
   
   return (
     <div className="bg-black">
-      <Header/>
       <Carousel data={data} />
       <Movies data={data}/>
-      <Footer/>
     </div>
   );
 };
