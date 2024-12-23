@@ -5,6 +5,7 @@ import { useRoutes } from "react-router-dom";
 import Details from "../pages/details/Details";
 import Layout from "../pages/layout/Layout";
 import Movies from "../pages/movies/Movies";
+import Saved from "../components/saved/Saved";
 
 const Router = () => {
   return (
@@ -29,6 +30,10 @@ const Router = () => {
             {
               path: "/movie/:id",
               element: <Details />,
+            },
+            {
+              path: "/saved",
+              element: <Saved />,
             },
             {
               path: "*",

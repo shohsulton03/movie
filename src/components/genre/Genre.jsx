@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Genre = ({ data, setSelectedGenre, selectedGenre }) => {
+const Genre = ({
+  searchParams,
+  setSearchParams,
+  data,
+  setSelectedGenre,
+  selectedGenre,
+  setPage,
+}) => {
   const handleChange = (id) => {
+    const params = new URLSearchParams(searchParams);
+    setPage(1);
+    params.set("page", "1");
+    setSearchParams(params);
     if (selectedGenre.includes(id)) {
       setSelectedGenre((prev) =>
         prev.filter((selectedId) => selectedId !== id)
@@ -10,6 +21,18 @@ const Genre = ({ data, setSelectedGenre, selectedGenre }) => {
       setSelectedGenre((prev) => [...prev, id]);
     }
   };
+
+  useEffect(() => {
+    if (selectedGenre.length) {
+      const params = new URLSearchParams(searchParams);
+      // params.set("page", "1")
+      params.set("genres", selectedGenre.join("-"));
+      setSearchParams(params);
+    } else {
+      setSearchParams({});
+    }
+  }, [selectedGenre]);
+
   return (
     <div className="container flex gap-3 overflow-auto p-5">
       {data?.map((item) => (

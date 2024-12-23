@@ -103,7 +103,7 @@ const Details = () => {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   return (
     <div className="bg-secondary">
