@@ -6,7 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoTvSharp } from "react-icons/io5";
 import React from "react";
 import logo from "@/assets/logos/logo.png";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const lang = [
   {
@@ -37,22 +37,22 @@ const Header = () => {
           />
         </div>
         <ul className="flex w-[250px] flex-wrap justify-between">
-          <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <NavLink to={"/"} className="flex flex-wrap flex-col items-center cursor-pointer">
             <IoTvSharp className="text-[20px] text-[#A1A1A1]" />
             <span className="text-[#A1A1A1]">Afisha</span>
-          </li>
-          <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          </NavLink>
+          <NavLink to={"/movies"} className="flex flex-wrap flex-col items-center cursor-pointer">
             <MdOutlineVibration className="text-[20px] text-[#A1A1A1]" />
-            <span className="text-[#A1A1A1]">Seans</span>
-          </li>
-          <li className="flex flex-wrap flex-col items-center cursor-pointer">
+            <span className="text-[#A1A1A1]">Movies</span>
+          </NavLink>
+          <NavLink to={"/saved"} className="flex flex-wrap flex-col items-center cursor-pointer">
             <RiCoupon3Line className="text-[20px] text-[#A1A1A1]" />
-            <span className="text-[#A1A1A1]">Ticket</span>
-          </li>
-          <li className="flex flex-wrap flex-col items-center cursor-pointer">
+            <span className="text-[#A1A1A1]">Saved</span>
+          </NavLink>
+          <NavLink to={"/search"} className="flex flex-wrap flex-col items-center cursor-pointer">
             <FiSearch className="text-[20px] text-[#A1A1A1]" />
             <span className="text-[#A1A1A1]">Search</span>
-          </li>
+          </NavLink>
         </ul>
         <div className="flex gap-2 items-center">
           <select className="h-full bg-slate-900 px-2 py-2 rounded-md text-white">
