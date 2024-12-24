@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { memo } from "react";
+import MovieItem from "./MovieItem";
 
-const MovieGrid = (data) => {
+const MovieGrid = ({ data }) => {
+  if (!data || data.results.length === 0) {
+    return (
+      <div className="text-center py-10">
+        <p className="text-white text-lg">Data not found!</p>
+      </div>
+    );
+  }
+
   return (
-    <div>MovieGrid</div>
-  )
-}
+    <div className="bg-black">
+      <div className="container mx-auto py-8">
+        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+          Movies
+        </h1>
+        <div className="flex flex-wrap justify-center gap-6">
+          {data.results.map((movie) => (
+            <MovieItem key={movie.id} {...movie} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default MovieGrid
+export default memo(MovieGrid);

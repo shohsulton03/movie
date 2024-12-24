@@ -6,6 +6,7 @@ import Details from "../pages/details/Details";
 import Layout from "../pages/layout/Layout";
 import Movies from "../pages/movies/Movies";
 import Saved from "../components/saved/Saved";
+import Search from "../pages/search/Search";
 
 const Router = () => {
   return (
@@ -34,6 +35,10 @@ const Router = () => {
             {
               path: "/saved",
               element: <Saved />,
+            },
+            {
+              path: "/search",
+              element: <Search />,
             },
             {
               path: "*",
